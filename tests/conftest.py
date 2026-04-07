@@ -19,9 +19,38 @@ def product_samsung() -> Product:
 
 
 @pytest.fixture
+def product_xiaomi() -> Product:
+    """Фикстура для создания одного товара"""
+    return Product("Xiaomi Mi 13", "Android", 600.0, 15)
+
+
+@pytest.fixture
+def product_nokia_dict() -> dict[str, Any]:
+    return {
+        "name": "Nokia 3310",
+        "description": "Legendary phone",
+        "price": 50.0,
+        "quantity": 100
+    }
+
+
+@pytest.fixture(autouse=True)
+def reset_category_counts() -> None:
+    """Автоматически сбрасывает счетчики классов перед каждым тестом"""
+    Category.category_count = 0
+    Category.product_count = 0
+
+
+@pytest.fixture
 def category_electronics(product_iphone: Product, product_samsung: Product) -> Category:
     """Фикстура для создания категории с двумя товарами"""
     return Category("Электроника", "Гаджеты и техника", [product_iphone, product_samsung])
+
+
+@pytest.fixture
+def products_list(category_electronics: Category) -> List[Product]:
+    """Фикстура для создания категории с двумя товарами в форме списка"""
+    return category_electronics.products_list
 
 
 @pytest.fixture

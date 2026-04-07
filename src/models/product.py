@@ -18,6 +18,10 @@ class Product:
                     product.quantity += data["quantity"]
                     product.__price = max(product.__price, data["price"])
                     return cast(Self, product)
+
+        if products == []:
+            print("Объект класса создан, но список пуст")
+
         return cls(**data)
 
 
@@ -33,7 +37,7 @@ class Product:
         elif price < self.__price:
             print("Новая цена ниже старой.")
             ch = input("Подтвердите действие y/n: ")
-            if ch == "y":
+            if ch.lower() == "y":
                 self.__price = price
         else:
             self.__price = price

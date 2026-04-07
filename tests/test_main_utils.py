@@ -13,7 +13,7 @@ def test_main_with_argument(capsys: pytest.CaptureFixture[str]) -> None:
 
     mock_category = MagicMock()
     mock_category.name = "Смартфоны"
-    mock_category.products = [mock_product]
+    mock_category.products_list = [mock_product]
 
     with patch('utils.main_utils.load_data') as mock_load:
         with patch('utils.main_utils.create_objects') as mock_create:

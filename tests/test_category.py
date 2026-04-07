@@ -1,4 +1,5 @@
 from models.category import Category
+from models.product import Product
 
 
 def test_category_init(category_electronics: Category) -> None:
@@ -11,3 +12,20 @@ def test_category_init(category_electronics: Category) -> None:
     assert category_electronics.products_list[1].description == "Android"
     assert category_electronics.products_list[1].price == 800.0
     assert category_electronics.products_list[1].quantity == 5
+
+
+def test_category_products_property(category_electronics: Category) -> None:
+    """Тест строкового представления списка товаров в категории"""
+    expected_output = (
+        "iPhone 15, 1000.0 руб. Остаток: 10 шт.\n"
+        "Samsung S23, 800.0 руб. Остаток: 5 шт."
+    )
+    assert category_electronics.products == expected_output
+
+
+def test_add_product(category_electronics: Category, product_xiaomi: Product) -> None:
+    """Тест добавления товара в список товаров в категории"""
+    category_electronics.add_product(product_xiaomi)
+
+    assert category_electronics.product_count == 3
+    assert category_electronics.products_list[2].name == "Xiaomi Mi 13"
