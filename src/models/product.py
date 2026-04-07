@@ -1,3 +1,6 @@
+from typing import Any, Optional, Self, cast
+
+
 class Product:
 
     def __init__(self, name: str, description: str, price: float, quantity: int):
@@ -8,23 +11,23 @@ class Product:
 
 
     @classmethod
-    def new_product(cls, data: dict, products: list | None = None):
+    def new_product(cls, data: dict[str, Any], products: Optional[list["Product"]] = None) -> Self:
         if products:
             for product in products:
                 if product.name == data["name"]:
                     product.quantity += data["quantity"]
                     product.__price = max(product.__price, data["price"])
-                    return product
+                    return cast(Self, product)
         return cls(**data)
 
 
     @property
-    def price(self):
+    def price(self) -> float:
         return self.__price
 
 
     @price.setter
-    def price(self, price: float):
+    def price(self, price: float) -> None:
         if price <= 0:
             print("Цена не должна быть нулевая или отрицательная")
         elif price < self.__price:
