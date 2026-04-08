@@ -15,7 +15,7 @@ def test_create_objects_success(sample_data: List[dict[str, Any]]) -> None:
     assert result[0].name == "Электроника"
 
     # Проверяем товары внутри категории
-    products = result[0].products
+    products = result[0].products_list
     assert len(products) == 2
     assert isinstance(products[0], Product)
     assert products[0].name == "Смартфон"
@@ -34,4 +34,4 @@ def test_create_objects_no_products() -> None:
     }]
     result = create_objects(data)
     assert len(result) == 1
-    assert result[0].products == []
+    assert result[0].products_list == []

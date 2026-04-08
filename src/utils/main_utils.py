@@ -14,7 +14,7 @@ def main(file_path: str) -> None:
     # 3. Работаем с объектами
     for category in categories:
         print(f"Категория: {category.name}")
-        for product in category.products:
+        for product in category.products_list:
             print(f" - Товар: {product.name}, Цена: {product.price}")
 
 
