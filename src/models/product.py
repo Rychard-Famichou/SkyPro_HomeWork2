@@ -9,6 +9,15 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self) -> str:
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
+
+    def __add__(self, other: "Product") -> float:
+        all_price_self = self.price + self.quantity
+        all_price_other = other.price + self.quantity
+        return all_price_self + all_price_other
+
 
     @classmethod
     def new_product(cls, data: dict[str, Any], products: Optional[list["Product"]] = None) -> Self:
