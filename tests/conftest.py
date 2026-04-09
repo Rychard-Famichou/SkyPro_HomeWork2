@@ -4,28 +4,57 @@ import pytest
 
 from models.category import Category
 from models.product import Product
+from models.product_lawngrass import LawnGrass
+from models.product_smartphone import Smartphone
+
+# @pytest.fixture
+# def product_iphone() -> Product:
+#     """Фикстура для создания одного товара"""
+#     return Product("iPhone 15", "Apple", 1000.0, 10)
 
 
 @pytest.fixture
-def product_iphone() -> Product:
-    """Фикстура для создания одного товара"""
-    return Product("iPhone 15", "Apple", 1000.0, 10)
+def product_iphone() -> Smartphone:
+    """ Фикстура для создания одного объекта класса """
+    return Smartphone("iPhone 15", "Apple", 1000.0, 10,
+                      100.0,"iPhone 15", 128, "Black")
+
+
+# @pytest.fixture
+# def product_samsung() -> Product:
+#     """Фикстура для создания одного товара"""
+#     return Product("Samsung S23", "Android", 800.0, 5)
 
 
 @pytest.fixture
-def product_samsung() -> Product:
-    """Фикстура для создания одного товара"""
-    return Product("Samsung S23", "Android", 800.0, 5)
+def product_samsung() -> Smartphone:
+    """ Фикстура для создания одного объекта класса """
+    return Smartphone("Samsung S23", "Android", 800.0, 5,
+                      100.0, "Samsung S23", 64, "White")
 
 
 @pytest.fixture
 def product_xiaomi() -> Product:
-    """Фикстура для создания одного товара"""
+    """ Фикстура для создания одного объекта класса """
     return Product("Xiaomi Mi 13", "Android", 600.0, 15)
 
 
 @pytest.fixture
+def product_nokia() -> Product:
+    """ Фикстура для создания одного объекта класса """
+    return Product("Nokia 3310", "Legendary phone", 50.0, 100)
+
+
+@pytest.fixture
+def product_rus_grass() -> LawnGrass:
+    """ Фикстура для создания одного объекта класса """
+    return LawnGrass("Камыш", "Издалека напоминает камыш", 100.0, 10,
+                     "Россия", "7 дней", "Бурый")
+
+
+@pytest.fixture
 def product_nokia_dict() -> dict[str, Any]:
+    """Фикстура для создания словаря"""
     return {
         "name": "Nokia 3310",
         "description": "Legendary phone",

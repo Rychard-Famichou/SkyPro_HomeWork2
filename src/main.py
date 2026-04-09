@@ -1,6 +1,4 @@
 from models.category import Category
-from models.product import Product
-from models.product_iterator import ProductIterator
 from models.product_lawngrass import LawnGrass
 from models.product_smartphone import Smartphone
 
@@ -88,8 +86,9 @@ if __name__ == '__main__':
     print(Category.product_count)
     print()
 
+    # Проверка обработки ошибки: передаем строку вместо объекта Product
     try:
-        category_smartphones.add_product("Not a product")
+        category_smartphones.add_product("Not a product") # type: ignore[arg-type]
     except TypeError:
         print("Возникла ошибка TypeError при добавлении не продукта")
     else:

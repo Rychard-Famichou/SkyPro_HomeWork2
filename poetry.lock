@@ -429,6 +429,21 @@ pytest = ">=7"
 testing = ["process-tests", "pytest-xdist", "virtualenv"]
 
 [[package]]
+name = "pytest-lazy-fixtures"
+version = "1.4.0"
+description = "Allows you to use fixtures in @pytest.mark.parametrize."
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+files = [
+    {file = "pytest_lazy_fixtures-1.4.0-py3-none-any.whl", hash = "sha256:c5db4506fa0ade5887189d1a18857fec4c329b4f49043fef6732c67c9553389a"},
+    {file = "pytest_lazy_fixtures-1.4.0.tar.gz", hash = "sha256:f544b60c96b909b307558a62cc1f28f026f11e9f03d7f583a1dc636de3dbcb10"},
+]
+
+[package.dependencies]
+pytest = ">=7"
+
+[[package]]
 name = "ruff"
 version = "0.15.9"
 description = "An extremely fast Python linter and code formatter, written in Rust."
@@ -471,4 +486,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "8a1d5990d5af4774cfa636d53cd3df051e864a8e19d54027a1e3e2e1cd34b25d"
+content-hash = "dddfbaee9677d90c9bd02d03aa33eb96400f7b5c81116c5c28413c5035094e92"

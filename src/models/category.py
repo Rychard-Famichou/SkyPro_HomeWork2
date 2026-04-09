@@ -15,7 +15,7 @@ class Category:
         """ Создание объекта класса, для добавления используем метод-проверку """
         self.name = name
         self.description = description
-        self.__products = []
+        self.__products: list[Product] = []
         Category.category_count += 1
 
         for p in products:
@@ -32,13 +32,11 @@ class Category:
 
     def add_product(self, product: Product) -> None:
         """ Добавляет новый продукт в список и обновляет счетчик """
-
-        if not isinstance(product, Product):
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.product_count += 1
+        else:
             raise TypeError("Добавлять можно только объекты классов Product или его наследников")
-
-        self.__products.append(product)
-
-        Category.product_count += 1
 
 
     @property
