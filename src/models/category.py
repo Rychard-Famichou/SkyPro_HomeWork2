@@ -4,11 +4,17 @@ if TYPE_CHECKING:
     from models.product import Product
 
 class Category:
+    """ Custom class:
+    Название
+    Описание
+    Список объектов класса Product
+    """
     category_count = 0
     product_count = 0
 
 
     def __init__(self, name: str, description: str, products: list["Product"]) -> None:
+        """ Создание объекта класса """
         self.name = name
         self.description = description
         self.__products = products
@@ -17,19 +23,27 @@ class Category:
         Category.product_count += len(products)
 
 
+    def __str__(self) -> str:
+        """ Возвращает строку класса """
+        all_products_count = 0
+        for product in self.__products:
+            all_products_count += product.quantity
+        return f"{self.name}, количество продуктов: {all_products_count} шт."
+
+
     def add_product(self, product: "Product") -> None:
+        """ Добавляет новый продукт """
         self.__products.append(product)
         Category.product_count += 1
 
 
     @property
     def products(self) -> str:
-        products_strings = []
-        for product in self.__products:
-            products_strings.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.")
-        return "\n".join(products_strings)
+        """ Возвращает строку каждого продукта """
+        return "\n".join(map(str, self.__products))
 
 
     @property
     def products_list(self) -> list["Product"]:
+        """ Возвращает список продуктов """
         return self.__products

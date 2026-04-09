@@ -14,6 +14,10 @@ def test_category_init(category_electronics: Category) -> None:
     assert category_electronics.products_list[1].quantity == 5
 
 
+def test_str(category_electronics: Category) -> None:
+    assert str(category_electronics) == "Электроника, количество продуктов: 15 шт."
+
+
 def test_category_products_property(category_electronics: Category) -> None:
     """Тест строкового представления списка товаров в категории"""
     expected_output = (
