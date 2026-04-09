@@ -1,5 +1,6 @@
 from models.category import Category
 from models.product import Product
+from models.product_iterator import ProductIterator
 
 if __name__ == '__main__':
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
@@ -26,3 +27,9 @@ if __name__ == '__main__':
     print(product1 + product2)
     print(product1 + product3)
     print(product2 + product3)
+    print()
+
+    iterator = ProductIterator(category1)
+
+    for product in iterator:
+        print(product)
