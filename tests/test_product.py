@@ -15,6 +15,11 @@ def test_product_init(product_iphone: Product) -> None:
     assert product_iphone.quantity == 10
 
 
+def test_add(product_iphone: Product, product_samsung: Product) -> None:
+    target_price = product_iphone + product_samsung
+    assert target_price == 14000.0
+
+
 class TestProductNewProduct:
     """Группа тестов для метода создания и обновления продукта"""
 

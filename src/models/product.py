@@ -14,8 +14,8 @@ class Product:
 
 
     def __add__(self, other: "Product") -> float:
-        all_price_self = self.price + self.quantity
-        all_price_other = other.price + self.quantity
+        all_price_self = self.price * self.quantity
+        all_price_other = other.price * other.quantity
         return all_price_self + all_price_other
 
 
