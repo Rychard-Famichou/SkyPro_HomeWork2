@@ -7,7 +7,7 @@ from models.product import Product
 
 
 def test_category_init(category_electronics: Category) -> None:
-    """ Тест инициализации класса """
+    """ Тест __init__ класса """
     assert category_electronics.name == "Электроника"
     assert category_electronics.description == "Гаджеты и техника"
     assert category_electronics.category_count == 1
@@ -19,6 +19,7 @@ def test_category_init(category_electronics: Category) -> None:
 
 
 def test_str(category_electronics: Category) -> None:
+    """ Тест __str__ класса """
     assert str(category_electronics) == "Электроника, количество продуктов: 15 шт."
 
 

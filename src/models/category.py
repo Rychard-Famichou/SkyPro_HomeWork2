@@ -12,7 +12,7 @@ class Category:
 
 
     def __init__(self, name: str, description: str, products: list[Product]) -> None:
-        """ Создание объекта класса, для добавления используем метод-проверку """
+        """ Создание объекта класса, для добавления Product используем метод-проверку add_product """
         self.name = name
         self.description = description
         self.__products: list[Product] = []
