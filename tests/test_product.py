@@ -1,23 +1,40 @@
-from typing import Any
+from typing import Any, Union
 
 import pytest
 from _pytest.capture import CaptureFixture
 from _pytest.monkeypatch import MonkeyPatch
+from pytest_lazy_fixtures import lf
 
 from models.product import Product
+from models.product_lawngrass import LawnGrass
+from models.product_smartphone import Smartphone
 
 
-def test_product_init(product_iphone: Product) -> None:
-    """ Тест инициализации класса """
+def test_init(product_iphone: Product) -> None:
+    """ Тест метода __init__ """
     assert product_iphone.name == "iPhone 15"
     assert product_iphone.description == "Apple"
     assert product_iphone.price == 1000.0
     assert product_iphone.quantity == 10
 
 
-def test_add(product_iphone: Product, product_samsung: Product) -> None:
-    target_price = product_iphone + product_samsung
-    assert target_price == 14000.0
+@pytest.mark.parametrize("product_1, product_2, expected", [
+    (lf("product_iphone"), lf("product_samsung"), 14000.0),
+    (lf("product_xiaomi"), lf("product_nokia"), 14000.0),
+])
+def test_add_success(product_1: Union[Product, Smartphone],
+                     product_2: Union[Product, Smartphone],
+                     expected: float) -> None:
+    """ Тест метода __add__: успех """
+    assert product_1 + product_2 == expected
+
+
+def test_add_error(product_iphone: Smartphone, product_rus_grass: LawnGrass) -> None:
+    """ Тест метода __add__: ошибка """
+    with pytest.raises(TypeError) as excinfo:
+        _ = product_iphone + product_rus_grass
+
+    assert str(excinfo.value) == "Можно складывать только продукты одного класса"
 
 
 class TestProductNewProduct:

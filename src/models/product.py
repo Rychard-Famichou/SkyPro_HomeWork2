@@ -16,6 +16,7 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+
     def __str__(self) -> str:
         """ Возвращает строку класса """
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
@@ -23,9 +24,12 @@ class Product:
 
     def __add__(self, other: "Product") -> float:
         """ Возвращает цену * количество двух продуктов """
-        all_price_self = self.price * self.quantity
-        all_price_other = other.price * other.quantity
-        return all_price_self + all_price_other
+        if type(self) is type(other):
+            all_price_self = self.price * self.quantity
+            all_price_other = other.price * other.quantity
+            return all_price_self + all_price_other
+        else:
+            raise TypeError("Можно складывать только продукты одного класса")
 
 
     @classmethod
