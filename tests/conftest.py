@@ -3,26 +3,31 @@ from typing import Any, List
 import pytest
 
 from models.category import Category
+from models.order import Order
 from models.product import Product
 from models.product_lawngrass import LawnGrass
 from models.product_smartphone import Smartphone
 
-# @pytest.fixture
-# def product_iphone() -> Product:
-#     """Фикстура для создания одного товара"""
-#     return Product("iPhone 15", "Apple", 1000.0, 10)
+
+@pytest.fixture
+def setup_order() -> type[Order]:
+    """Фикстура для очистки списка продуктов перед каждым тестом"""
+    Order.all_products.clear()
+    return Order
+
+
+@pytest.fixture
+def sample_products(setup_order: Order, product_iphone: Product, product_samsung: Product) -> tuple[Product, Product]:
+    """Фикстура для наполнения склада тестовыми данными"""
+    p1 = product_iphone
+    p2 = product_samsung
+    return p1, p2
 
 
 @pytest.fixture
 def product_iphone() -> Smartphone:
     """Фикстура для создания одного объекта класса"""
     return Smartphone("iPhone 15", "Apple", 1000.0, 10, 100.0, "iPhone 15", 128, "Black")
-
-
-# @pytest.fixture
-# def product_samsung() -> Product:
-#     """Фикстура для создания одного товара"""
-#     return Product("Samsung S23", "Android", 800.0, 5)
 
 
 @pytest.fixture

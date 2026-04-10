@@ -1,7 +1,8 @@
+from models.base_category import BaseCategory
 from models.product import Product
 
 
-class Category:
+class Category(BaseCategory):
     """Custom class:
     Название
     Описание
@@ -38,7 +39,7 @@ class Category:
 
     @property
     def products(self) -> str:
-        """Возвращает строку каждого продукта"""
+        """Возвращает строку каждого продукта в категории"""
         return "\n".join(map(str, self.__products))
 
     @property

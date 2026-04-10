@@ -21,6 +21,7 @@ class Product(MixinLog, BaseProduct):
         super().__init__()
 
     def __repr__(self) -> str:
+        """Возвращает строку класса для отладки"""
         return f"{self.__class__.__name__}({self.name}, {self.description}, {self.price}, {self.quantity})"
 
     def __str__(self) -> str:

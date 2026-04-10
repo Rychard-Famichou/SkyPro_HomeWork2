@@ -1,4 +1,4 @@
-from typing import Union, Any, Type
+from typing import Any
 
 import pytest
 from _pytest.capture import CaptureFixture
@@ -22,10 +22,9 @@ from models.product_smartphone import Smartphone
         ),
     ],
 )
-def test_init(capsys: CaptureFixture[str],
-              product_class: type[Smartphone | LawnGrass],
-              data: tuple[Any, ...],
-              expected_repr: str) -> None:
+def test_init(
+    capsys: CaptureFixture[str], product_class: type[Smartphone | LawnGrass], data: tuple[Any, ...], expected_repr: str
+) -> None:
     """Тест метода __init__"""
     product = product_class(*data)
 
