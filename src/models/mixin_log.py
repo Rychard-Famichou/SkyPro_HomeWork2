@@ -1,5 +1,8 @@
+from typing import Any
+
+
 class MixinLog:
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any) ->None:
         super().__init__(*args, **kwargs)
         print(repr(self))

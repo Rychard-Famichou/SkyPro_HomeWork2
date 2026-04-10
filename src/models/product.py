@@ -20,7 +20,7 @@ class Product(MixinLog, BaseProduct):
         self.quantity = quantity
         super().__init__()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.name}, {self.description}, {self.price}, {self.quantity})"
 
     def __str__(self) -> str:

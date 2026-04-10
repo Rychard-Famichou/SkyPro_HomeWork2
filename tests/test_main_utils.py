@@ -2,7 +2,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from utils.main_utils import main
+from utils.second_enter import main
 
 
 def test_main_with_argument(capsys: pytest.CaptureFixture[str]) -> None:
