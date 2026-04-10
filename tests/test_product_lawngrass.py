@@ -2,7 +2,7 @@ from models.product_lawngrass import LawnGrass
 
 
 def test_init(product_rus_grass: LawnGrass) -> None:
-    """ Тест метода __init__ """
+    """Тест метода __init__"""
     assert product_rus_grass.name == "Камыш"
     assert product_rus_grass.description == "Издалека напоминает камыш"
     assert product_rus_grass.price == 100.0

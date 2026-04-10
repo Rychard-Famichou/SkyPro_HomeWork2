@@ -2,7 +2,7 @@ from typing import Any, Optional, Self, cast
 
 
 class Product:
-    """ Custom class:
+    """Custom class:
     Название
     Описание
     Цена
@@ -10,20 +10,18 @@ class Product:
     """
 
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
-        """ Создание объекта класса """
+        """Создание объекта класса"""
         self.name = name
         self.description = description
         self.__price = price
         self.quantity = quantity
 
-
     def __str__(self) -> str:
-        """ Возвращает строку класса """
+        """Возвращает строку класса"""
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
-
     def __add__(self, other: "Product") -> float:
-        """ Возвращает цену * количество двух продуктов """
+        """Возвращает цену * количество двух продуктов"""
         if type(self) is type(other):
             all_price_self = self.price * self.quantity
             all_price_other = other.price * other.quantity
@@ -31,10 +29,9 @@ class Product:
         else:
             raise TypeError("Можно складывать только продукты одного класса")
 
-
     @classmethod
     def new_product(cls, data: dict[str, Any], products: Optional[list["Product"]] = None) -> Self:
-        """ Возвращает объект класса:
+        """Возвращает объект класса:
         принимает словарь,
         складывает количество,
         цена наивысшая
@@ -51,16 +48,14 @@ class Product:
 
         return cls(**data)
 
-
     @property
     def price(self) -> float:
-        """ Возвращает приватный атрибут: Цена """
+        """Возвращает приватный атрибут: Цена"""
         return self.__price
-
 
     @price.setter
     def price(self, price: float) -> None:
-        """ Условное изменение атрибута: Цена """
+        """Условное изменение атрибута: Цена"""
         if price <= 0:
             print("Цена не должна быть нулевая или отрицательная")
         elif price < self.__price:

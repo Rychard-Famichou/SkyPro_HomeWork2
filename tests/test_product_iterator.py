@@ -5,10 +5,10 @@ from models.product import Product
 from models.product_iterator import ProductIterator
 
 
-def test_product_iterator_full_cycle(category_electronics: Category,
-                                     product_iphone: Product,
-                                     product_samsung: Product) -> None:
-    """ Проверка полного цикла работы итератора """
+def test_product_iterator_full_cycle(
+    category_electronics: Category, product_iphone: Product, product_samsung: Product
+) -> None:
+    """Проверка полного цикла работы итератора"""
     iterator = ProductIterator(category_electronics)
 
     # 1. Инициализируем итератор
@@ -23,8 +23,10 @@ def test_product_iterator_full_cycle(category_electronics: Category,
         next(it)
 
 
-def test_product_iterator_reusable(category_electronics: Category,) -> None:
-    """ Проверка, что итератор можно перезапустить """
+def test_product_iterator_reusable(
+    category_electronics: Category,
+) -> None:
+    """Проверка, что итератор можно перезапустить"""
     iterator = ProductIterator(category_electronics)
 
     # Первый проход

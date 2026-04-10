@@ -8,7 +8,7 @@ def load_data(file_path: str) -> list[dict[str, Any]]:
     path = Path(file_path)
 
     # Читаем содержимое файла
-    data = path.read_text(encoding='utf-8')
+    data = path.read_text(encoding="utf-8")
 
     # Десериализуем JSON
     loaded_data = json.loads(data)

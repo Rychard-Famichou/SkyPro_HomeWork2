@@ -15,8 +15,8 @@ def test_main_with_argument(capsys: pytest.CaptureFixture[str]) -> None:
     mock_category.name = "Смартфоны"
     mock_category.products_list = [mock_product]
 
-    with patch('utils.main_utils.load_data') as mock_load:
-        with patch('utils.main_utils.create_objects') as mock_create:
+    with patch("utils.main_utils.load_data") as mock_load:
+        with patch("utils.main_utils.create_objects") as mock_create:
             # Настраиваем возвращаемые значения моков
             mock_load.return_value = [{"fake": "data"}]
             mock_create.return_value = [mock_category]

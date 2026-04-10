@@ -2,7 +2,7 @@ from models.product_smartphone import Smartphone
 
 
 def test_init(product_iphone: Smartphone) -> None:
-    """ Тест метода __init__ """
+    """Тест метода __init__"""
     assert product_iphone.name == "iPhone 15"
     assert product_iphone.description == "Apple"
     assert product_iphone.price == 1000.0
