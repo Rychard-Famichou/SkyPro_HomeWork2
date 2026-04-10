@@ -1,7 +1,10 @@
 from typing import Any, Optional, Self, cast
 
+from models.base_product import BaseProduct
+from models.mixin_log import MixinLog
 
-class Product:
+
+class Product(MixinLog, BaseProduct):
     """Custom class:
     Название
     Описание
@@ -15,6 +18,10 @@ class Product:
         self.description = description
         self.__price = price
         self.quantity = quantity
+        super().__init__()
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.name}, {self.description}, {self.price}, {self.quantity})"
 
     def __str__(self) -> str:
         """Возвращает строку класса"""
