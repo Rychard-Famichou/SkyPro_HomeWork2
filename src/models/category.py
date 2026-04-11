@@ -1,5 +1,6 @@
 from models.base_category import BaseCategory
 from models.product import Product
+from models.zero_except import ZeroExcept
 
 
 class Category(BaseCategory):
@@ -52,12 +53,29 @@ class Category(BaseCategory):
             return 0.0
 
     def add_product(self, product: Product) -> None:
-        """Добавляет новый продукт в список и обновляет счетчик"""
-        if isinstance(product, Product):
+        """Добавляет новый продукт в список с обработкой исключений, обновляет счётчик"""
+        try:
+            if not isinstance(product, Product):
+                raise TypeError("Добавлять можно только объекты классов Product или его наследников")
+
+            if product.quantity == 0:
+                raise ZeroExcept()
+
+        except TypeError as e:
+            print(e)
+            raise e
+
+        except ZeroExcept as e:
+            print(e)
+            raise e
+
+        else:
             self.__products.append(product)
             Category.product_count += 1
-        else:
-            raise TypeError("Добавлять можно только объекты классов Product или его наследников")
+            print("Продукт добавлен")
+
+        finally:
+            print("Процедура добавления продукта завершена")
 
     @property
     def products(self) -> str:

@@ -1,8 +1,10 @@
+import pytest
 from _pytest.capture import CaptureFixture
 
 from models.order import Order
 from models.product import Product
 from models.product_smartphone import Smartphone
+from models.zero_except import ZeroExcept
 
 
 def test_order_creation_success(sample_products: tuple[Smartphone, Smartphone], capsys: CaptureFixture[str]) -> None:
@@ -46,9 +48,17 @@ def test_mixin_registration() -> None:
 
 def test_order_products(sample_products: tuple[Smartphone, Smartphone], capsys: CaptureFixture[str]) -> None:
     """Тест вывода products"""
-    order = Order("iPhone 15", 0)
+    order = Order("iPhone 15", 5)
     print(order.products)
     captured = capsys.readouterr()
-    expected_output = "iPhone 15, 1000.0 руб. Остаток: 10 шт.\nSamsung S23, 800.0 руб. Остаток: 5 шт."
+    expected_output = "iPhone 15, 1000.0 руб. Остаток: 5 шт.\nSamsung S23, 800.0 руб. Остаток: 5 шт."
 
     assert expected_output in captured.out
+
+
+def test_zero_quantity() -> None:
+    """Тест 0 количество"""
+    with pytest.raises(ZeroExcept) as excinfo:
+        _ = Order("iPhone 15", 0)
+
+    assert str(excinfo.value) == "Товар с нулевым количеством не может быть добавлен"

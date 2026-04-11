@@ -5,6 +5,7 @@ import pytest
 from models.category import Category
 from models.order import Order
 from models.product import Product
+from models.zero_except import ZeroExcept
 
 
 def test_category_init(category_electronics: Category) -> None:
@@ -39,11 +40,20 @@ def test_add_product_success(category_electronics: Category, product_xiaomi: Pro
 
 
 def test_add_product_error(category_electronics: Category, product_nokia_dict: dict[str, Any]) -> None:
-    """Тест метода add_product: ошибка"""
+    """Тест метода add_product: ошибка - not Product"""
     with pytest.raises(TypeError) as excinfo:
         category_electronics.add_product(product_nokia_dict)  # type: ignore[arg-type]
 
     assert str(excinfo.value) == "Добавлять можно только объекты классов Product или его наследников"
+
+
+def test_add_product_error2() -> None:
+    """Тест метода add_product: ошибка - 0 количество"""
+    product = Product("Samsung S23", "Android", 800.0, 5)
+    Order("Samsung S23", 5)
+    category = Category("Электроника", "Гаджеты и техника", [])
+    with pytest.raises(ZeroExcept):
+        category.add_product(product)
 
 
 def test_middle_price_success(product_iphone: Product) -> None:
