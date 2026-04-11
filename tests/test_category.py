@@ -5,7 +5,7 @@ import pytest
 from models.category import Category
 from models.order import Order
 from models.product import Product
-from models.zero_except import ZeroExcept
+from models.zero_except import ZeroQuantityError
 
 
 def test_category_init(category_electronics: Category) -> None:
@@ -52,7 +52,7 @@ def test_add_product_error2() -> None:
     product = Product("Samsung S23", "Android", 800.0, 5)
     Order("Samsung S23", 5)
     category = Category("Электроника", "Гаджеты и техника", [])
-    with pytest.raises(ZeroExcept):
+    with pytest.raises(ZeroQuantityError):
         category.add_product(product)
 
 

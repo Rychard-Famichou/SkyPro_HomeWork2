@@ -1,6 +1,6 @@
 from models.base_category import BaseCategory
 from models.product import Product
-from models.zero_except import ZeroExcept
+from models.zero_except import ZeroQuantityError
 
 
 class Category(BaseCategory):
@@ -59,13 +59,13 @@ class Category(BaseCategory):
                 raise TypeError("Добавлять можно только объекты классов Product или его наследников")
 
             if product.quantity == 0:
-                raise ZeroExcept()
+                raise ZeroQuantityError()
 
         except TypeError as e:
             print(e)
             raise e
 
-        except ZeroExcept as e:
+        except ZeroQuantityError as e:
             print(e)
             raise e
 

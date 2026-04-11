@@ -1,7 +1,7 @@
 from typing import Any
 
 from models.base_category import BaseCategory
-from models.zero_except import ZeroExcept
+from models.zero_except import ZeroQuantityError
 
 
 class Order(BaseCategory):
@@ -26,7 +26,7 @@ class Order(BaseCategory):
     def check_quantity(quantity: int) -> int:
         """Возвращает количество, если оно больше нуля. Иначе возбуждает ошибку"""
         if quantity <= 0:
-            raise ZeroExcept
+            raise ZeroQuantityError
         return quantity
 
     def add_product(self) -> float | Any:

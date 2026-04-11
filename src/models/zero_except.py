@@ -1,4 +1,4 @@
-class ZeroExcept(Exception):
+class ZeroQuantityError(Exception):
     """Custom class, Ошибка:
     Если попытаться добавить продукт с 0 количеством товара
     """
