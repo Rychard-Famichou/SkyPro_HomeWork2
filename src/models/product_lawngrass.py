@@ -2,7 +2,7 @@ from models.product import Product
 
 
 class LawnGrass(Product):
-    """ Custom class:
+    """Custom class:
     Название
     Описание
     Цена
@@ -12,15 +12,17 @@ class LawnGrass(Product):
     Цвет
     """
 
-    def __init__(self,
-                 name: str,
-                 description: str,
-                 price: float,
-                 quantity: int,
-                 country: str,
-                 germination_period: str,
-                 color: str) -> None:
-        """ Создание объекта класса """
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: str,
+        color: str,
+    ) -> None:
+        """Создание объекта класса"""
         super().__init__(name, description, price, quantity)
         self.country = country
         self.germination_period = germination_period

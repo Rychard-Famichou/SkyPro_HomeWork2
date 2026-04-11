@@ -21,17 +21,15 @@ def test_create_objects_success(sample_data: List[dict[str, Any]]) -> None:
     assert products[0].name == "Смартфон"
     assert products[1].price == 5000.0
 
+
 def test_create_objects_empty_list() -> None:
     """Проверка работы с пустым списком"""
     assert create_objects([]) == []
 
+
 def test_create_objects_no_products() -> None:
     """Проверка категории без товаров"""
-    data = [{
-        "name": "Пустая",
-        "description": "Нет товаров",
-        "products": []
-    }]
+    data = [{"name": "Пустая", "description": "Нет товаров", "products": []}]
     result = create_objects(data)
     assert len(result) == 1
     assert result[0].products_list == []
