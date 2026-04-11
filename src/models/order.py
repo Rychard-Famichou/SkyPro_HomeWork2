@@ -34,9 +34,7 @@ class Order(BaseCategory):
         print(f"Товара {self.product_name} нет на складе")
         return 0.0
 
-    @classmethod
-    def products(cls) -> None:
-        """Метод для просмотра остатков на складе"""
-        # print("\n--- Текущий склад ---")
-        for p in cls.all_products:
-            print(p)
+    @property
+    def products(self) -> str:
+        """Возвращает строку каждого добавленного продукта"""
+        return "\n".join(map(str, self.all_products))

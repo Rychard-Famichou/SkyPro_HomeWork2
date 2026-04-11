@@ -12,6 +12,7 @@ def test_order_creation_success(sample_products: tuple[Smartphone, Smartphone], 
     print(order)
     captured = capsys.readouterr()
     expected_output = "Заказ на iPhone 15 в количестве 3 шт."
+
     assert expected_output in captured.out
     assert order.total_price == 3000.0
     assert iphone.quantity == 7
@@ -34,13 +35,20 @@ def test_order_product_not_found(sample_products: tuple[Smartphone, Smartphone])
     assert order.total_price == 0.0
 
 
-def test_mixin_registration(capsys: CaptureFixture[str]) -> None:
-    """Проверка, что Mixin действительно добавляет товар в Order"""
+def test_mixin_registration() -> None:
+    """Тест, что Mixin действительно добавляет товар в Order"""
     Order.all_products.clear()
     Smartphone("Test Phone", "Brand", 100.0, 1, 50, "New", 32, "Purple")
-    Order.products()
-    captured = capsys.readouterr()
-    expected_output = "Test Phone, 100.0 руб. Остаток: 1 шт."
-    assert expected_output in captured.out
+
     assert len(Order.all_products) == 1
     assert Order.all_products[0].name == "Test Phone"
+
+
+def test_order_products(sample_products: tuple[Smartphone, Smartphone], capsys: CaptureFixture[str]) -> None:
+    """Тест вывода products"""
+    order = Order("iPhone 15", 0)
+    print(order.products)
+    captured = capsys.readouterr()
+    expected_output = "iPhone 15, 1000.0 руб. Остаток: 10 шт.\nSamsung S23, 800.0 руб. Остаток: 5 шт."
+
+    assert expected_output in captured.out

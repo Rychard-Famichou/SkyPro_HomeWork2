@@ -13,3 +13,8 @@ class BaseCategory(ABC):
     @abstractmethod
     def __str__(self) -> str:
         pass
+
+    @property
+    @abstractmethod
+    def products(self) -> str:
+        pass
