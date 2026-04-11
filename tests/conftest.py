@@ -9,15 +9,15 @@ from models.product_lawngrass import LawnGrass
 from models.product_smartphone import Smartphone
 
 
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def setup_order() -> type[Order]:
-    """Фикстура для очистки списка продуктов перед каждым тестом"""
+    """Фикстура для очистки полного списка продуктов перед каждым тестом"""
     Order.all_products.clear()
     return Order
 
 
 @pytest.fixture
-def sample_products(setup_order: Order, product_iphone: Product, product_samsung: Product) -> tuple[Product, Product]:
+def sample_products(product_iphone: Product, product_samsung: Product) -> tuple[Product, Product]:
     """Фикстура для наполнения склада тестовыми данными"""
     p1 = product_iphone
     p2 = product_samsung
@@ -58,6 +58,12 @@ def product_rus_grass() -> LawnGrass:
 def product_nokia_dict() -> dict[str, Any]:
     """Фикстура для создания словаря"""
     return {"name": "Nokia 3310", "description": "Legendary phone", "price": 50.0, "quantity": 100}
+
+
+@pytest.fixture
+def product_iphone_zero_quantity() -> Product:
+    """Фикстура для создания одного объекта класса с нулевым количеством"""
+    return Product("iPhone 6", "Old", 100.0, 0)
 
 
 @pytest.fixture(autouse=True)

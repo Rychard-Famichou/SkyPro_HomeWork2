@@ -1,6 +1,7 @@
 from _pytest.capture import CaptureFixture
 
 from models.order import Order
+from models.product import Product
 from models.product_smartphone import Smartphone
 
 
@@ -36,12 +37,11 @@ def test_order_product_not_found(sample_products: tuple[Smartphone, Smartphone])
 
 
 def test_mixin_registration() -> None:
-    """Тест, что Mixin действительно добавляет товар в Order"""
-    Order.all_products.clear()
-    Smartphone("Test Phone", "Brand", 100.0, 1, 50, "New", 32, "Purple")
+    """Тест, что Mixin действительно добавляет товар в Order.all_products"""
+    Product("Samsung S23", "Android", 800.0, 5)
 
     assert len(Order.all_products) == 1
-    assert Order.all_products[0].name == "Test Phone"
+    assert Order.all_products[0].name == "Samsung S23"
 
 
 def test_order_products(sample_products: tuple[Smartphone, Smartphone], capsys: CaptureFixture[str]) -> None:

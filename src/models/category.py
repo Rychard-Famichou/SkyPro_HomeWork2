@@ -29,6 +29,28 @@ class Category(BaseCategory):
             all_products_count += product.quantity
         return f"{self.name}, количество продуктов: {all_products_count} шт."
 
+    def middle_price(self) -> float:
+        """
+        Возвращает среднюю цену.
+        Если товар один — учитывает его количество.
+        Если товаров много — среднее арифметическое их цен.
+        """
+
+        try:
+            if not self.products_list:
+                return round(1 / len(self.products_list), 2)
+
+            elif len(self.products_list) == 1:
+                product = self.products_list[0]
+                return round((product.price * product.quantity) / product.quantity, 2)
+
+            else:
+                total_prices = sum(p.price for p in self.products_list)
+                return round(total_prices / len(self.products_list), 2)
+
+        except ZeroDivisionError:
+            return 0.0
+
     def add_product(self, product: Product) -> None:
         """Добавляет новый продукт в список и обновляет счетчик"""
         if isinstance(product, Product):

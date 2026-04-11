@@ -17,7 +17,7 @@ class Product(MixinLog, BaseProduct):
         self.name = name
         self.description = description
         self.__price = price
-        self.quantity = quantity
+        self.quantity = self.check_quantity(quantity)
         super().__init__()
 
     def __repr__(self) -> str:
@@ -36,6 +36,13 @@ class Product(MixinLog, BaseProduct):
             return all_price_self + all_price_other
         else:
             raise TypeError("Можно складывать только продукты одного класса")
+
+    @staticmethod
+    def check_quantity(quantity: int) -> int:
+        """Возвращает количество, если оно больше нуля. Иначе возбуждает ошибку"""
+        if quantity <= 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+        return quantity
 
     @classmethod
     def new_product(cls, data: dict[str, Any], products: Optional[list["Product"]] = None) -> Self:

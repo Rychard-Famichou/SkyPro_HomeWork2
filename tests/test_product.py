@@ -18,6 +18,12 @@ def test_init(product_iphone: Product) -> None:
     assert product_iphone.quantity == 10
 
 
+def test_init_zero_quantity() -> None:
+    """Тест метода __init__ с нулевым количеством"""
+    with pytest.raises(ValueError):
+        _ = Product("iPhone 6", "Old", 100.0, 0)
+
+
 @pytest.mark.parametrize(
     "product_1, product_2, expected",
     [

@@ -6,10 +6,10 @@
 | src\\models\\\_\_init\_\_.py        |        0 |        0 |    100% |
 | src\\models\\base\_category.py      |       12 |        3 |     75% |
 | src\\models\\base\_product.py       |        2 |        0 |    100% |
-| src\\models\\category.py            |       28 |        0 |    100% |
+| src\\models\\category.py            |       39 |        0 |    100% |
 | src\\models\\mixin\_log.py          |        7 |        0 |    100% |
 | src\\models\\order.py               |       23 |        0 |    100% |
-| src\\models\\product.py             |       44 |        0 |    100% |
+| src\\models\\product.py             |       49 |        0 |    100% |
 | src\\models\\product\_iterator.py   |       14 |        0 |    100% |
 | src\\models\\product\_lawngrass.py  |        7 |        0 |    100% |
 | src\\models\\product\_smartphone.py |        8 |        0 |    100% |
@@ -17,4 +17,4 @@
 | src\\utils\\converters.py           |       13 |        0 |    100% |
 | src\\utils\\loaders.py              |        8 |        0 |    100% |
 | src\\utils\\second\_enter.py        |       10 |        0 |    100% |
-| **TOTAL**                           |  **181** |    **5** | **97%** |
+| **TOTAL**                           |  **197** |    **5** | **97%** |
