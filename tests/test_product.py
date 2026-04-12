@@ -18,6 +18,14 @@ def test_init(product_iphone: Product) -> None:
     assert product_iphone.quantity == 10
 
 
+def test_init_zero_quantity() -> None:
+    """Тест метода __init__ с нулевым количеством"""
+    with pytest.raises(ValueError) as excinfo:
+        _ = Product("iPhone 6", "Old", 100.0, 0)
+
+    assert str(excinfo.value) == "Товар с нулевым количеством не может быть добавлен"
+
+
 @pytest.mark.parametrize(
     "product_1, product_2, expected",
     [

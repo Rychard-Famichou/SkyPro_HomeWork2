@@ -3,7 +3,9 @@ from typing import Any
 import pytest
 
 from models.category import Category
+from models.order import Order
 from models.product import Product
+from models.zero_except import ZeroQuantityError
 
 
 def test_category_init(category_electronics: Category) -> None:
@@ -29,7 +31,7 @@ def test_category_products_property(category_electronics: Category) -> None:
     assert category_electronics.products == expected_output
 
 
-def test_add_product(category_electronics: Category, product_xiaomi: Product) -> None:
+def test_add_product_success(category_electronics: Category, product_xiaomi: Product) -> None:
     """Тест метода add_product: успех"""
     category_electronics.add_product(product_xiaomi)
 
@@ -38,8 +40,46 @@ def test_add_product(category_electronics: Category, product_xiaomi: Product) ->
 
 
 def test_add_product_error(category_electronics: Category, product_nokia_dict: dict[str, Any]) -> None:
-    """Тест метода add_product: ошибка"""
+    """Тест метода add_product: ошибка - not Product"""
     with pytest.raises(TypeError) as excinfo:
         category_electronics.add_product(product_nokia_dict)  # type: ignore[arg-type]
 
     assert str(excinfo.value) == "Добавлять можно только объекты классов Product или его наследников"
+
+
+def test_add_product_error2() -> None:
+    """Тест метода add_product: ошибка - 0 количество"""
+    product = Product("Samsung S23", "Android", 800.0, 5)
+    Order("Samsung S23", 5)
+    category = Category("Электроника", "Гаджеты и техника", [])
+    with pytest.raises(ZeroQuantityError):
+        category.add_product(product)
+
+
+def test_middle_price_success(product_iphone: Product) -> None:
+    """Тест метода middle_price: успех - один продукт"""
+    category = Category("Электроника", "Гаджеты и техника", [product_iphone])
+    assert category.middle_price() == 1000.0
+
+
+def test_middle_price_success2(category_electronics: Category) -> None:
+    """Тест метода middle_price: успех - два продукта"""
+    assert category_electronics.middle_price() == 900.0
+
+
+def test_middle_price_error_empty() -> None:
+    """Тест метода middle_price: ошибка - пустой список продуктов"""
+    category = Category("Электроника", "Гаджеты и техника", [])
+
+    assert len(category.products_list) == 0
+    assert category.middle_price() == 0.0
+
+
+def test_middle_price_error() -> None:
+    """Тест метода middle_price: ошибка - у продукта количество 0"""
+    product = Product("Samsung S23", "Android", 800.0, 5)
+    category = Category("Электроника", "Гаджеты и техника", [product])
+    Order("Samsung S23", 5)
+
+    assert product.quantity == 0
+    assert category.middle_price() == 0.0

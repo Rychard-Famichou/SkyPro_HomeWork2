@@ -1,6 +1,7 @@
 from typing import Any
 
 from models.base_category import BaseCategory
+from models.zero_except import ZeroQuantityError
 
 
 class Order(BaseCategory):
@@ -14,12 +15,19 @@ class Order(BaseCategory):
 
     def __init__(self, product_name: str, quantity: int) -> None:
         self.product_name = product_name
-        self.quantity = quantity
+        self.quantity = self.check_quantity(quantity)
         self.total_price = self.add_product()
 
     def __str__(self) -> str:
         """Возвращает строку класса"""
         return f"Заказ на {self.product_name} в количестве {self.quantity} шт."
+
+    @staticmethod
+    def check_quantity(quantity: int) -> int:
+        """Возвращает количество, если оно больше нуля. Иначе возбуждает ошибку"""
+        if quantity <= 0:
+            raise ZeroQuantityError
+        return quantity
 
     def add_product(self) -> float | Any:
         for product in Order.all_products:
